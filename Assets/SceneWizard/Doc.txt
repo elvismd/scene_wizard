@@ -1,0 +1,19 @@
+* Scene Wizard documentation *
+
+## What is it for?
+	It creates a custom window to manage scenes from a specific folder of your choice. 
+	You can switch between scenes faster without looking for these scenes on the Assets folder.
+
+## How to open the window?
+    Window -> EMD Tools -> Scene Wizard 
+
+## What else?
+    It also creates an asset on the root folder called SceneWizard_Config.
+	It's a scriptable object that stores the scenes from the chosen folders and other user options.
+	
+- Needs some info?
+	You can contact me at contact@elvismd.com!
+
+
+Thank you!	
+EMD Tools 
