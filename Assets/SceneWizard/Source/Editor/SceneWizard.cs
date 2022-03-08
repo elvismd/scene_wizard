@@ -25,17 +25,22 @@ public class SceneWizard : EditorWindow
             if (!File.Exists(Application.dataPath + "/SceneWizard_Config.asset"))
             {
                 SceneWizardConfig newConfig = new SceneWizardConfig();
-                AssetDatabase.CreateAsset(newConfig, "Assets/SceneWizard_Config.asset");
+	            AssetDatabase.CreateAsset(newConfig, "Assets/SceneWizard_Config.asset");
+                
                 AssetDatabase.SaveAssets();
 
                 AssetDatabase.Refresh();
+
+                   EditorUtility.SetDirty(config);
             }
 
             var foundAssets = AssetDatabase.FindAssets("SceneWizard_Config", new[] { "Assets/" });
             if (foundAssets.Length > 0)
             {
                 string path = AssetDatabase.GUIDToAssetPath(foundAssets[0]);
-                config = AssetDatabase.LoadAssetAtPath<SceneWizardConfig>(path);
+	            config = AssetDatabase.LoadAssetAtPath<SceneWizardConfig>(path);
+                
+	            //EditorUtility.SetDirty(config);
             }
         }
     }
@@ -43,7 +48,9 @@ public class SceneWizard : EditorWindow
     void ReloadScenes()
     {
         config.scenes = new List<SceneConfigSetup>();
-        LoadFromPath(config.folderPath);
+	    LoadFromPath(config.folderPath);
+        
+	    
     }
 
     void LoadFromPath(string path)
@@ -197,6 +204,8 @@ public class SceneWizard : EditorWindow
 
                 if (GUILayout.Button("Open Single"))
                 {
+                    UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                    
                     UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scene.path, UnityEditor.SceneManagement.OpenSceneMode.Single);
                 }
 
