@@ -15,6 +15,7 @@ public class SceneWizard : EditorWindow
     {
         // Get existing open window or if none, make a new one:
         SceneWizard window = (SceneWizard)EditorWindow.GetWindow(typeof(SceneWizard));
+        window.titleContent = new GUIContent("Scene Wizard", new GUIContent(EditorGUIUtility.IconContent("d_UnityLogo")).image);
         window.Show();
     }
 
@@ -108,8 +109,15 @@ public class SceneWizard : EditorWindow
     private void OnGUI()
     {
         GUILayout.Space(10);
+        EditorGUILayout.BeginHorizontal();
+        
         GUILayout.Label("Scene Wizard", EditorStyles.boldLabel);
+        if(GUILayout.Button(new GUIContent(EditorGUIUtility.IconContent("_Help")).image, GUILayout.MaxWidth(30)))
+        {
+            SceneWizard_WelcomeWindow.Init();
+        }
 
+        EditorGUILayout.EndHorizontal();
         GUILayout.Space(20);
         RefreshConfig();
         ReloadScenes();
