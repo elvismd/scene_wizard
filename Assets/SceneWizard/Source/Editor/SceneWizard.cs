@@ -23,6 +23,8 @@ public class SceneWizard : EditorWindow
     {
         if (config == null)
         {
+            bool sucessFindingConfig = false;
+
             if (!File.Exists(Application.dataPath + "/SceneWizard_Config.asset"))
             {
                 SceneWizardConfig newConfig = new SceneWizardConfig();
@@ -31,8 +33,7 @@ public class SceneWizard : EditorWindow
                 AssetDatabase.SaveAssets();
 
                 AssetDatabase.Refresh();
-
-                   EditorUtility.SetDirty(config);
+                
             }
 
             var foundAssets = AssetDatabase.FindAssets("SceneWizard_Config", new[] { "Assets/" });
@@ -40,9 +41,10 @@ public class SceneWizard : EditorWindow
             {
                 string path = AssetDatabase.GUIDToAssetPath(foundAssets[0]);
 	            config = AssetDatabase.LoadAssetAtPath<SceneWizardConfig>(path);
-                
-	            //EditorUtility.SetDirty(config);
             }
+
+            if(sucessFindingConfig)
+                EditorUtility.SetDirty(config);
         }
     }
 
@@ -92,6 +94,8 @@ public class SceneWizard : EditorWindow
                 LoadFromPath(dir);
             }
         }
+
+        EditorUtility.SetDirty(config);
     }
 
     private void OnEnable()
@@ -136,6 +140,8 @@ public class SceneWizard : EditorWindow
 
                 string path = EditorUtility.OpenFolderPanel("Select a folder to load Scenes from", "", "");
                 config.folderPath = path;
+
+                EditorUtility.SetDirty(config);
             }
         }
         else
@@ -149,6 +155,8 @@ public class SceneWizard : EditorWindow
                 {
                     config.folderPath = path;
                     config.scenes = new List<SceneConfigSetup>();
+
+                    EditorUtility.SetDirty(config);
                 }
             }
 
@@ -165,6 +173,7 @@ public class SceneWizard : EditorWindow
             {
                 config.folderPath = "";
                 config.scenes = new List<SceneConfigSetup>();
+                EditorUtility.SetDirty(config);
             }
         }
 
