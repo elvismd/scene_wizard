@@ -1,0 +1,14 @@
+{
+  "name": "com.elvismd.scene_wizard",
+  "version": "0.0.3",
+  "displayName": "Scene Wizard",
+  "description": "Scene Wizard is a quick shortcut window for Unity Engine to switch between scenes without having to look for them on the Assets folder.",
+  "unity": "2020.3",
+  "documentationUrl": "https://github.com/elvismd/scene_wizard/blob/main/Assets/SceneWizard/Doc.txt",
+  "dependencies": {},
+  "author": {
+    "name": "elvismd",
+    "email": "contact@elvismd.com",
+    "url": "https://elvismd.com"
+  }
+}
